@@ -1,0 +1,39 @@
+■ 로그프레소와 파이썬 연동 방법
+
+   1. 로그프레소가 설치된 서버에 파이썬 설치
+
+   2. 분석을 위한 기본 라이브러리 pandas 패키지 설치
+
+   3. 로그프레소를 9월 이상 버전으로 패치
+
+   4. 로그프레소 레지스트리 변경 regedit -> Options 하단부에 -Daraqne.logdb.exec_query=enabled 추가
+
+   5. 설명서에 포함된 python.py 파일을 Logpresso 폴더로 이동
+
+   6. python.py 파일의 ########## Machine Learning ######## 부분에 분석 로직 작성 후 저장
+
+   7. 로그프레소에서 파이썬 호출 명령
+
+      - table sys_cpu_logs             ->   입력 데이터
+        | execpipe python python.py    ->   위 입력 데이터를 파이썬에 보내고, 파이썬과 연동
+
+
+
+
+■ python.py 세부 설명
+
+   1. 로그프레소로부터 json 형태로 입력받음 (위 예제 기준, table sys_cpu_logs의 결과 값이 입력 데이터)
+
+   2. json 형태의 데이터를 dictionary 형태로 변경
+
+   3. dictionary 형태의 데이터를 dataframe 형태로 변경 (분석 데이터 준비 완료)
+
+   4. dataframe 데이터(준비된 분석 데이터)를 활용하여 머신러닝 등 분석 적용
+
+   5. 분석된 결과의 dataframe 형태의 데이터를 dictionary 형태로 변경
+
+   6. dictionary 형태의 데이터를 json 형태로 변경
+
+   7. json 형태의 데이터를 로그프레소에 출력(print)
+
+
